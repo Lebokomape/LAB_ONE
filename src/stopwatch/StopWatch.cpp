@@ -8,3 +8,31 @@ double getProcessTime()
 	clock_t time = clock();
 	return static_cast<double>(time)/CLOCKS_PER_SEC;
 }
+StopWatch::StopWatch()
+{
+	running = false;
+    startTime = 0;
+    stopTime = 0;
+}
+
+
+void StopWatch::start() {
+	if (running == false) {
+		startTime = this->getProcessTime();
+		running = true;
+	}
+}
+
+void StopWatch::stop() {
+	if (running == true) {
+        stopTime = getProcessTime();
+        running = false;
+    }
+}
+
+double StopWatch::getElapsedTime(){
+    if (running == false) {
+        return stopTime - startTime;
+    }
+	return getProcessTime() - startTime;
+}
